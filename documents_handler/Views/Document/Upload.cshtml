@@ -1,0 +1,29 @@
+@model documents_handler.Models.RawDocument
+@{
+    ViewData["Title"] = "Uplaod";
+}
+
+<h1>Upload A Document</h1>
+
+<form method="post" asp-controller="Document" asp-action="Uplaod_Doc" enctype = "multipart/form-data">
+    <div class="form-group">
+    <label for="name">Document Name</label>
+    <input type="text" class="form-control"  placeholder="Doc Name" asp-for="Name">
+  </div>
+  <div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control form-control-sm" asp-for="Category">
+        <option value="SD">Supporting Documents</option>
+        <option value="SIG">Signatures</option>
+    </select>
+  </div>
+  <div class="form-group">
+    
+    <input type="file" class="form-control-file" asp-for="Doc">
+  </div>
+  <div class="form-group">
+    
+    <input type="submit" value="Uplaod" class="btn btn-primary"/>
+  </div>
+  
+</form>

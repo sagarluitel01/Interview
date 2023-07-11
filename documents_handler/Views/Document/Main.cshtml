@@ -1,0 +1,48 @@
+@model List<documents_handler.Models.Document>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center">Document List</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Path </th>
+            <th> Category </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doc in Model)
+        {
+                <tr>
+                    <td> 
+                         <a href='@Url.Action("Display", "Document", new { path = doc.Path })' target="_blank"> @doc.Name </a> </td>
+                    <td>@doc.Path </td>
+                    <td>@doc.Category </td>
+                    <td> <form asp-action="Delete">
+                            <input type="hidden" asp-for="@doc.Name"/>
+                            <input type="hidden" asp-for="@doc.Path"/>
+                            <input type="hidden" asp-for="@doc.Category"/>
+                            <input type="submit" value="Delete" class="btn btn-danger"/>
+                        </form> 
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["Success"] != null)
+{
+    <div class="bg-success temp">
+        <p> @TempData["Success"].ToString()</p>
+    </div>
+}
+@if (TempData["Failed"] != null)
+{
+    <div class="bg-danger temp">
+        <p> @TempData["Failed"].ToString()</p>
+    </div>
+}
+
